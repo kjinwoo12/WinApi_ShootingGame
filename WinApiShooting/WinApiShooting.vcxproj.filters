@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="App">
+      <UniqueIdentifier>{a1000001-0000-4000-8000-000000000001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{a1000001-0000-4000-8000-000000000002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameplay">
+      <UniqueIdentifier>{a1000001-0000-4000-8000-000000000003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Render">
+      <UniqueIdentifier>{a1000001-0000-4000-8000-000000000004}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App\main.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\Game.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\GdiplusRuntime.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\WinApp.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="Core\DeltaTime.cpp"><Filter>Core</Filter></ClCompile>
+    <ClCompile Include="Gameplay\EffectsEngine.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\PowerUpSystem.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\BulletSystem.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\GrazeSystem.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\PlayerWeapon.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\Combat.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\PlayingSession.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\PlayerController.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\EnemyBehaviors.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\ScoutBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\FighterBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\MineSeekerBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\MineSentryBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\MineBurstBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\SawPatrolBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\SawChaseBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\MidBossPhases.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\MidBossBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\OrbitMineBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\EnemySimulator.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\WaveCatalog.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\WaveDirector.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Render\Renderer.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\WorldDrawer.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\RenderPowerUp.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\RenderBossIntro.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\RenderHud.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\RenderTitle.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\RenderGameOver.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\Assets.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\WorldSprites.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\UiSprites.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\Sprite.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\SpriteSheet.cpp"><Filter>Render</Filter></ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Common.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\DeltaTime.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\GameState.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\EnemyKind.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\WeaponLevel.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\BulletOwner.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Bullet.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Enemy.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Explosion.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\PowerUp.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Particle.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\PlayerState.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\SessionState.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Entities.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\World.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Input.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Random.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Core\Collision.h"><Filter>Core</Filter></ClInclude>
+    <ClInclude Include="Gameplay\EffectsEngine.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\PowerUpSystem.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\BulletSystem.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\GrazeSystem.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\PlayerWeapon.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\Combat.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\PlayingSession.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\PlayerController.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\KillOutcome.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\EnemySystems.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\IEnemyBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\EnemyBehaviors.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\ScoutBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\FighterBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\MineSeekerBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\MineSentryBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\MineBurstBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\SawPatrolBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\SawChaseBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\MidBossPhases.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\MidBossBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\OrbitMineBehavior.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\EnemySimulator.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\FormationId.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\WavePlan.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\WaveCatalog.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\WaveDirector.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Render\Assets.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\WorldSprites.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\UiSprites.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\Renderer.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\WorldDrawer.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\RenderUi.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\RenderUiDraw.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\Sprite.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\SpriteSheet.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="App\AppContext.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\GdiplusRuntime.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\WinApp.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\Game.h"><Filter>App</Filter></ClInclude>
+  </ItemGroup>
+</Project>

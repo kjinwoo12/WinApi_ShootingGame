@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{9d1dc1e1-9fed-479d-ad09-a98d2ff40484}</ProjectGuid>
+    <RootNamespace>WinApiShooting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Label="Shared" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <LocalDebuggerWorkingDirectory>$(ProjectDir)</LocalDebuggerWorkingDirectory>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Core;$(ProjectDir)Gameplay;$(ProjectDir)Render;$(ProjectDir)App;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Core;$(ProjectDir)Gameplay;$(ProjectDir)Render;$(ProjectDir)App;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Core;$(ProjectDir)Gameplay;$(ProjectDir)Render;$(ProjectDir)App;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Core;$(ProjectDir)Gameplay;$(ProjectDir)Render;$(ProjectDir)App;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="App\main.cpp" />
+    <ClCompile Include="App\Game.cpp" />
+    <ClCompile Include="App\GdiplusRuntime.cpp" />
+    <ClCompile Include="App\WinApp.cpp" />
+    <ClCompile Include="Core\DeltaTime.cpp" />
+    <ClCompile Include="Gameplay\EffectsEngine.cpp" />
+    <ClCompile Include="Gameplay\PowerUpSystem.cpp" />
+    <ClCompile Include="Gameplay\BulletSystem.cpp" />
+    <ClCompile Include="Gameplay\GrazeSystem.cpp" />
+    <ClCompile Include="Gameplay\PlayerWeapon.cpp" />
+    <ClCompile Include="Gameplay\Combat.cpp" />
+    <ClCompile Include="Gameplay\PlayingSession.cpp" />
+    <ClCompile Include="Gameplay\PlayerController.cpp" />
+    <ClCompile Include="Gameplay\EnemyBehaviors.cpp" />
+    <ClCompile Include="Gameplay\ScoutBehavior.cpp" />
+    <ClCompile Include="Gameplay\FighterBehavior.cpp" />
+    <ClCompile Include="Gameplay\MineSeekerBehavior.cpp" />
+    <ClCompile Include="Gameplay\MineSentryBehavior.cpp" />
+    <ClCompile Include="Gameplay\MineBurstBehavior.cpp" />
+    <ClCompile Include="Gameplay\SawPatrolBehavior.cpp" />
+    <ClCompile Include="Gameplay\SawChaseBehavior.cpp" />
+    <ClCompile Include="Gameplay\MidBossPhases.cpp" />
+    <ClCompile Include="Gameplay\MidBossBehavior.cpp" />
+    <ClCompile Include="Gameplay\OrbitMineBehavior.cpp" />
+    <ClCompile Include="Gameplay\EnemySimulator.cpp" />
+    <ClCompile Include="Gameplay\WaveCatalog.cpp" />
+    <ClCompile Include="Gameplay\WaveDirector.cpp" />
+    <ClCompile Include="Render\Renderer.cpp" />
+    <ClCompile Include="Render\WorldDrawer.cpp" />
+    <ClCompile Include="Render\RenderPowerUp.cpp" />
+    <ClCompile Include="Render\RenderBossIntro.cpp" />
+    <ClCompile Include="Render\RenderHud.cpp" />
+    <ClCompile Include="Render\RenderTitle.cpp" />
+    <ClCompile Include="Render\RenderGameOver.cpp" />
+    <ClCompile Include="Render\Assets.cpp" />
+    <ClCompile Include="Render\WorldSprites.cpp" />
+    <ClCompile Include="Render\UiSprites.cpp" />
+    <ClCompile Include="Render\Sprite.cpp" />
+    <ClCompile Include="Render\SpriteSheet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Common.h" />
+    <ClInclude Include="Core\DeltaTime.h" />
+    <ClInclude Include="Core\GameState.h" />
+    <ClInclude Include="Core\EnemyKind.h" />
+    <ClInclude Include="Core\WeaponLevel.h" />
+    <ClInclude Include="Core\BulletOwner.h" />
+    <ClInclude Include="Core\Bullet.h" />
+    <ClInclude Include="Core\Enemy.h" />
+    <ClInclude Include="Core\Explosion.h" />
+    <ClInclude Include="Core\PowerUp.h" />
+    <ClInclude Include="Core\Particle.h" />
+    <ClInclude Include="Core\PlayerState.h" />
+    <ClInclude Include="Core\SessionState.h" />
+    <ClInclude Include="Core\Entities.h" />
+    <ClInclude Include="Core\World.h" />
+    <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Core\Random.h" />
+    <ClInclude Include="Core\Collision.h" />
+    <ClInclude Include="Gameplay\EffectsEngine.h" />
+    <ClInclude Include="Gameplay\PowerUpSystem.h" />
+    <ClInclude Include="Gameplay\BulletSystem.h" />
+    <ClInclude Include="Gameplay\GrazeSystem.h" />
+    <ClInclude Include="Gameplay\PlayerWeapon.h" />
+    <ClInclude Include="Gameplay\Combat.h" />
+    <ClInclude Include="Gameplay\PlayingSession.h" />
+    <ClInclude Include="Gameplay\PlayerController.h" />
+    <ClInclude Include="Gameplay\KillOutcome.h" />
+    <ClInclude Include="Gameplay\EnemySystems.h" />
+    <ClInclude Include="Gameplay\IEnemyBehavior.h" />
+    <ClInclude Include="Gameplay\EnemyBehaviors.h" />
+    <ClInclude Include="Gameplay\ScoutBehavior.h" />
+    <ClInclude Include="Gameplay\FighterBehavior.h" />
+    <ClInclude Include="Gameplay\MineSeekerBehavior.h" />
+    <ClInclude Include="Gameplay\MineSentryBehavior.h" />
+    <ClInclude Include="Gameplay\MineBurstBehavior.h" />
+    <ClInclude Include="Gameplay\SawPatrolBehavior.h" />
+    <ClInclude Include="Gameplay\SawChaseBehavior.h" />
+    <ClInclude Include="Gameplay\MidBossPhases.h" />
+    <ClInclude Include="Gameplay\MidBossBehavior.h" />
+    <ClInclude Include="Gameplay\OrbitMineBehavior.h" />
+    <ClInclude Include="Gameplay\EnemySimulator.h" />
+    <ClInclude Include="Gameplay\FormationId.h" />
+    <ClInclude Include="Gameplay\WavePlan.h" />
+    <ClInclude Include="Gameplay\WaveCatalog.h" />
+    <ClInclude Include="Gameplay\WaveDirector.h" />
+    <ClInclude Include="Render\Assets.h" />
+    <ClInclude Include="Render\WorldSprites.h" />
+    <ClInclude Include="Render\UiSprites.h" />
+    <ClInclude Include="Render\Renderer.h" />
+    <ClInclude Include="Render\WorldDrawer.h" />
+    <ClInclude Include="Render\RenderUi.h" />
+    <ClInclude Include="Render\RenderUiDraw.h" />
+    <ClInclude Include="Render\Sprite.h" />
+    <ClInclude Include="Render\SpriteSheet.h" />
+    <ClInclude Include="App\AppContext.h" />
+    <ClInclude Include="App\GdiplusRuntime.h" />
+    <ClInclude Include="App\WinApp.h" />
+    <ClInclude Include="App\Game.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+</Project>

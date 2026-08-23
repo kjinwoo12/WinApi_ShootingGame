@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="WinApiShooting/WinApiShooting.vcxproj" Id="9d1dc1e1-9fed-479d-ad09-a98d2ff40484" />
+</Solution>
