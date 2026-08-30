@@ -1,122 +1,74 @@
 #include "Game.h"
-#include "PlayingSession.h"
+#include "IScene.h"
+#include "TitleScene.h"
 
-Game::Game()
-    : powerUps(fx), weapon(bullets, fx), combat(fx, bullets), player(weapon, combat), enemies(bullets, fx), waves(enemies) {}
+Game::Game() = default;
 
 bool Game::init(HWND hwnd)
 {
-    window = hwnd;
-    if (!assets.load(window))
+    ctx.window = hwnd;
+    if (!ctx.assets.load(hwnd))
         return false;
-    if (!renderer.init())
+    if (!ctx.renderer.init())
         return false;
-    world.reserveDefaults();
-    state = GameState::Title;
+    ctx.world.reserveDefaults();
+    scene = std::make_unique<TitleScene>();
     return true;
 }
 
 void Game::shutdown()
 {
-    renderer.shutdown();
+    ctx.renderer.shutdown();
 }
 
 void Game::onKeyDown(WPARAM key)
 {
-    input.setKey(key, true);
+    ctx.input.setKey(key, true);
 
     if (key == 'X' || key == 'x' || key == 'C' || key == 'c')
     {
-        input.bombEdge = true;
+        ctx.input.bombEdge = true;
     }
 
     if (key == VK_ESCAPE)
     {
-        PostMessageW(window, WM_CLOSE, 0, 0);
+        PostMessageW(ctx.window, WM_CLOSE, 0, 0);
         return;
     }
 
-    if (state == GameState::Title && (key == VK_RETURN || key == VK_SPACE))
-    {
-        world.resetRun();
-        state = GameState::Playing;
-        return;
-    }
-
-    if (state == GameState::GameOver && (key == VK_RETURN || key == VK_SPACE))
-    {
-        state = GameState::Title;
-    }
+    scene->onKeyDown(ctx, key);
 }
 
 void Game::onKeyUp(WPARAM key)
 {
-    input.setKey(key, false);
+    ctx.input.setKey(key, false);
+    scene->onKeyUp(ctx, key);
 }
 
 void Game::update(float dt)
 {
-    world.session.titlePulse += dt;
-    world.session.gameTime += dt;
+    ctx.world.session.titlePulse += dt;
+    ctx.world.session.gameTime += dt;
 
-    if (world.session.shake > 0.f)
+    if (ctx.world.session.shake > 0.f)
     {
-        world.session.shake = (std::max)(0.f, world.session.shake - dt * 8.f);
+        ctx.world.session.shake = (std::max)(0.f, ctx.world.session.shake - dt * 8.f);
     }
 
-    switch (state)
-    {
-    case GameState::Title:
-        updateTitle(dt);
-        break;
-    case GameState::Playing:
-        updatePlaying(dt);
-        break;
-    case GameState::GameOver:
-        updateGameOver(dt);
-        break;
-    }
-}
-
-void Game::updateTitle(float dt)
-{
-    world.session.backgroundOffset += 40.f * dt;
-    if (world.session.backgroundOffset >= assets.world.background.height())
-    {
-        world.session.backgroundOffset -= static_cast<float>(assets.world.background.height());
-    }
-    world.player.exhaustAnim += dt * 12.f;
-    fx.updateExplosions(world, assets, dt);
-    fx.updateParticles(world, dt);
-}
-
-void Game::updateGameOver(float dt)
-{
-    world.session.backgroundOffset += 30.f * dt;
-    fx.updateExplosions(world, assets, dt);
-    fx.updateParticles(world, dt);
-}
-
-void Game::updatePlaying(float dt)
-{
-    PlayingSession::tickTimers(world, fx, rng, static_cast<float>(assets.world.background.height()), dt);
-
-    player.update(world, input, rng, dt);
-    enemies.update(world, rng, dt);
-    bullets.update(world, dt);
-    fx.updateExplosions(world, assets, dt);
-    powerUps.update(world, rng, dt);
-    fx.updateParticles(world, dt);
-    combat.handleCollisions(world, rng);
-    waves.trySpawn(world, rng, dt);
-
-    if (PlayingSession::checkPlayerDeath(world, fx, rng))
-    {
-        state = GameState::GameOver;
-    }
+    scene->update(ctx, dt);
+    applyPendingScene();
 }
 
 void Game::render(HDC hdc)
 {
-    renderer.draw(hdc, state, world, assets, rng);
+    scene->render(ctx, hdc);
+}
+
+void Game::applyPendingScene()
+{
+    std::unique_ptr<IScene> next = scene->takeNextScene();
+    if (next)
+    {
+        scene = std::move(next);
+    }
 }

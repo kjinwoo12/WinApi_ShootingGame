@@ -17,6 +17,11 @@
   <ItemGroup>
     <ClCompile Include="App\main.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\Game.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\IScene.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\SceneContext.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\TitleScene.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\PlayingScene.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\GameOverScene.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\GdiplusRuntime.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\WinApp.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="Core\DeltaTime.cpp"><Filter>Core</Filter></ClCompile>
@@ -114,5 +119,10 @@
     <ClInclude Include="App\GdiplusRuntime.h"><Filter>App</Filter></ClInclude>
     <ClInclude Include="App\WinApp.h"><Filter>App</Filter></ClInclude>
     <ClInclude Include="App\Game.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\IScene.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\SceneContext.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\TitleScene.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\PlayingScene.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\GameOverScene.h"><Filter>App</Filter></ClInclude>
   </ItemGroup>
 </Project>

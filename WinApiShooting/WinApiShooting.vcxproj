@@ -163,6 +163,11 @@
   <ItemGroup>
     <ClCompile Include="App\main.cpp" />
     <ClCompile Include="App\Game.cpp" />
+    <ClCompile Include="App\IScene.cpp" />
+    <ClCompile Include="App\SceneContext.cpp" />
+    <ClCompile Include="App\TitleScene.cpp" />
+    <ClCompile Include="App\PlayingScene.cpp" />
+    <ClCompile Include="App\GameOverScene.cpp" />
     <ClCompile Include="App\GdiplusRuntime.cpp" />
     <ClCompile Include="App\WinApp.cpp" />
     <ClCompile Include="Core\DeltaTime.cpp" />
@@ -260,6 +265,11 @@
     <ClInclude Include="App\GdiplusRuntime.h" />
     <ClInclude Include="App\WinApp.h" />
     <ClInclude Include="App\Game.h" />
+    <ClInclude Include="App\IScene.h" />
+    <ClInclude Include="App\SceneContext.h" />
+    <ClInclude Include="App\TitleScene.h" />
+    <ClInclude Include="App\PlayingScene.h" />
+    <ClInclude Include="App\GameOverScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
