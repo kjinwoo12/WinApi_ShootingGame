@@ -7,8 +7,8 @@ GrazeSystem::GrazeSystem(EffectsEngine& effects)
 void GrazeSystem::apply(World& world, RandomSource& rng, Vec2 at)
 {
     PlayerState& player = world.player;
-    SessionState& session = world.session;
-    session.score += 10 * (1 + session.combo / 10);
+    RunSession& run = world.session.run;
+    run.score += 10 * (1 + run.combo / 10);
     if (player.raging())
     {
         player.rageTimer = clampFloat(player.rageTimer + 0.12f, 0.f, 6.f);
@@ -25,7 +25,7 @@ void GrazeSystem::apply(World& world, RandomSource& rng, Vec2 at)
         p.vel = {rng.nextFloat(-40.f, 40.f), rng.nextFloat(-40.f, 40.f)};
         p.life = p.maxLife = 0.15f;
         p.size = 2.5f;
-        p.color = Gdiplus::Color(255, 255, 230, 80);
+        p.color = rgba(255, 230, 80, 255);
         world.particles.push_back(p);
     }
 }

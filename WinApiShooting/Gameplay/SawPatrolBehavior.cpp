@@ -2,7 +2,7 @@
 
 bool SawPatrolBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     e.hp = e.maxHp = 8.f + wave * 0.3f;
     e.vel = {(rng.nextInt(0, 1) == 0 ? -1.f : 1.f) * 90.f, rng.nextFloat(25.f, 45.f)};
     e.radius = 18.f;

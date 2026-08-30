@@ -22,9 +22,13 @@
     <ClCompile Include="App\TitleScene.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\PlayingScene.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\GameOverScene.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\PlayingHudView.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\TitleOverlay.cpp"><Filter>App</Filter></ClCompile>
+    <ClCompile Include="App\GameOverOverlay.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\GdiplusRuntime.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="App\WinApp.cpp"><Filter>App</Filter></ClCompile>
     <ClCompile Include="Core\DeltaTime.cpp"><Filter>Core</Filter></ClCompile>
+    <ClCompile Include="Core\SessionState.cpp"><Filter>Core</Filter></ClCompile>
     <ClCompile Include="Gameplay\EffectsEngine.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\PowerUpSystem.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\BulletSystem.cpp"><Filter>Gameplay</Filter></ClCompile>
@@ -32,6 +36,8 @@
     <ClCompile Include="Gameplay\PlayerWeapon.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\Combat.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\PlayingSession.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\PlayingServices.cpp"><Filter>Gameplay</Filter></ClCompile>
+    <ClCompile Include="Gameplay\MidBossEncounter.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\PlayerController.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\EnemyBehaviors.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\ScoutBehavior.cpp"><Filter>Gameplay</Filter></ClCompile>
@@ -48,22 +54,20 @@
     <ClCompile Include="Gameplay\WaveCatalog.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Gameplay\WaveDirector.cpp"><Filter>Gameplay</Filter></ClCompile>
     <ClCompile Include="Render\Renderer.cpp"><Filter>Render</Filter></ClCompile>
-    <ClCompile Include="Render\WorldDrawer.cpp"><Filter>Render</Filter></ClCompile>
-    <ClCompile Include="Render\RenderPowerUp.cpp"><Filter>Render</Filter></ClCompile>
-    <ClCompile Include="Render\RenderBossIntro.cpp"><Filter>Render</Filter></ClCompile>
-    <ClCompile Include="Render\RenderHud.cpp"><Filter>Render</Filter></ClCompile>
-    <ClCompile Include="Render\RenderTitle.cpp"><Filter>Render</Filter></ClCompile>
-    <ClCompile Include="Render\RenderGameOver.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\WorldView.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\UiText.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\UiMeter.cpp"><Filter>Render</Filter></ClCompile>
     <ClCompile Include="Render\Assets.cpp"><Filter>Render</Filter></ClCompile>
+    <ClCompile Include="Render\WorldObjects.cpp"><Filter>Render</Filter></ClCompile>
     <ClCompile Include="Render\WorldSprites.cpp"><Filter>Render</Filter></ClCompile>
     <ClCompile Include="Render\UiSprites.cpp"><Filter>Render</Filter></ClCompile>
     <ClCompile Include="Render\Sprite.cpp"><Filter>Render</Filter></ClCompile>
     <ClCompile Include="Render\SpriteSheet.cpp"><Filter>Render</Filter></ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Color.h"><Filter>Core</Filter></ClInclude>
     <ClInclude Include="Core\Common.h"><Filter>Core</Filter></ClInclude>
     <ClInclude Include="Core\DeltaTime.h"><Filter>Core</Filter></ClInclude>
-    <ClInclude Include="Core\GameState.h"><Filter>Core</Filter></ClInclude>
     <ClInclude Include="Core\EnemyKind.h"><Filter>Core</Filter></ClInclude>
     <ClInclude Include="Core\WeaponLevel.h"><Filter>Core</Filter></ClInclude>
     <ClInclude Include="Core\BulletOwner.h"><Filter>Core</Filter></ClInclude>
@@ -86,6 +90,8 @@
     <ClInclude Include="Gameplay\PlayerWeapon.h"><Filter>Gameplay</Filter></ClInclude>
     <ClInclude Include="Gameplay\Combat.h"><Filter>Gameplay</Filter></ClInclude>
     <ClInclude Include="Gameplay\PlayingSession.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\PlayingServices.h"><Filter>Gameplay</Filter></ClInclude>
+    <ClInclude Include="Gameplay\MidBossEncounter.h"><Filter>Gameplay</Filter></ClInclude>
     <ClInclude Include="Gameplay\PlayerController.h"><Filter>Gameplay</Filter></ClInclude>
     <ClInclude Include="Gameplay\KillOutcome.h"><Filter>Gameplay</Filter></ClInclude>
     <ClInclude Include="Gameplay\EnemySystems.h"><Filter>Gameplay</Filter></ClInclude>
@@ -110,9 +116,10 @@
     <ClInclude Include="Render\WorldSprites.h"><Filter>Render</Filter></ClInclude>
     <ClInclude Include="Render\UiSprites.h"><Filter>Render</Filter></ClInclude>
     <ClInclude Include="Render\Renderer.h"><Filter>Render</Filter></ClInclude>
-    <ClInclude Include="Render\WorldDrawer.h"><Filter>Render</Filter></ClInclude>
-    <ClInclude Include="Render\RenderUi.h"><Filter>Render</Filter></ClInclude>
-    <ClInclude Include="Render\RenderUiDraw.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\WorldView.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\WorldObjects.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\UiText.h"><Filter>Render</Filter></ClInclude>
+    <ClInclude Include="Render\UiMeter.h"><Filter>Render</Filter></ClInclude>
     <ClInclude Include="Render\Sprite.h"><Filter>Render</Filter></ClInclude>
     <ClInclude Include="Render\SpriteSheet.h"><Filter>Render</Filter></ClInclude>
     <ClInclude Include="App\AppContext.h"><Filter>App</Filter></ClInclude>
@@ -123,6 +130,9 @@
     <ClInclude Include="App\SceneContext.h"><Filter>App</Filter></ClInclude>
     <ClInclude Include="App\TitleScene.h"><Filter>App</Filter></ClInclude>
     <ClInclude Include="App\PlayingScene.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\PlayingHudView.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\TitleOverlay.h"><Filter>App</Filter></ClInclude>
+    <ClInclude Include="App\GameOverOverlay.h"><Filter>App</Filter></ClInclude>
     <ClInclude Include="App\GameOverScene.h"><Filter>App</Filter></ClInclude>
   </ItemGroup>
 </Project>

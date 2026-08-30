@@ -1,6 +1,4 @@
 #include "Renderer.h"
-#include "RenderUi.h"
-#include "WorldDrawer.h"
 
 bool Renderer::init()
 {
@@ -21,7 +19,7 @@ void Renderer::shutdown()
     backBuffer = nullptr;
 }
 
-void Renderer::draw(HDC hdc, GameState state, const World& world, const Assets& assets, RandomSource& rng)
+void Renderer::beginFrame(const World& world, const Assets& assets, RandomSource& rng, float screenShake)
 {
     if (!backGfx || !backBuffer)
         return;
@@ -29,34 +27,30 @@ void Renderer::draw(HDC hdc, GameState state, const World& world, const Assets& 
     Gdiplus::Graphics& g = *backGfx;
     g.Clear(Gdiplus::Color(255, 4, 6, 18));
 
-    const float shake = world.session.shake;
-    const float shakeX = (shake > 0.f) ? rng.nextFloat(-shake, shake) * 10.f : 0.f;
-    const float shakeY = (shake > 0.f) ? rng.nextFloat(-shake, shake) * 10.f : 0.f;
+    const float shakeX = (screenShake > 0.f) ? rng.nextFloat(-screenShake, screenShake) * 10.f : 0.f;
+    const float shakeY = (screenShake > 0.f) ? rng.nextFloat(-screenShake, screenShake) * 10.f : 0.f;
 
-    Gdiplus::GraphicsState saved = g.Save();
+    worldLayerState = g.Save();
     g.TranslateTransform(shakeX, shakeY);
     drawBackground(g, world, assets);
-    WorldDrawer::draw(g, state, world, assets);
-    g.Restore(saved);
+}
 
-    if (state == GameState::Title)
-        RenderUi::drawTitle(g, world, assets);
-    else if (state == GameState::GameOver)
-        RenderUi::drawGameOver(g, world, assets);
-    else
-    {
-        RenderUi::drawHud(g, world, assets);
-        if (world.session.bossIntroActive())
-            RenderUi::drawBossIntro(g, world, assets);
-    }
+Gdiplus::Graphics& Renderer::worldGraphics()
+{
+    return *backGfx;
+}
 
-    if (world.session.bombFlash > 0.f)
-    {
-        const BYTE a = static_cast<BYTE>(clampFloat(90.f * (world.session.bombFlash / 0.25f), 0.f, 90.f));
-        Gdiplus::SolidBrush flash(Gdiplus::Color(a, 255, 255, 255));
-        g.FillRectangle(&flash, 0.f, 0.f, static_cast<float>(ScreenWidth),
-                        static_cast<float>(ScreenHeight));
-    }
+Gdiplus::Graphics& Renderer::endWorldLayer()
+{
+    if (backGfx)
+        backGfx->Restore(worldLayerState);
+    return *backGfx;
+}
+
+void Renderer::present(HDC hdc)
+{
+    if (!backGfx || !backBuffer)
+        return;
 
     Gdiplus::Graphics screen(hdc);
     screen.SetInterpolationMode(Gdiplus::InterpolationModeNearestNeighbor);
@@ -65,10 +59,11 @@ void Renderer::draw(HDC hdc, GameState state, const World& world, const Assets& 
 
 void Renderer::drawBackground(Gdiplus::Graphics& g, const World& world, const Assets& assets)
 {
-    const float h = static_cast<float>(assets.world.background.height());
-    const float y0 = -std::fmod(world.session.backgroundOffset, h);
-    assets.world.background.draw(g, 0.f, y0, 1.f);
-    assets.world.background.draw(g, 0.f, y0 + h, 1.f);
+    const float h = assets.backgroundHeight();
+    const float y0 = std::fmod(world.session.presentation.backgroundOffset, h) - h;
+    const Sprite& bg = assets.backgroundSprite();
+    bg.draw(g, 0.f, y0, 1.f);
+    bg.draw(g, 0.f, y0 + h, 1.f);
 
     Gdiplus::LinearGradientBrush bottom(
         Gdiplus::PointF(0, static_cast<Gdiplus::REAL>(ScreenHeight - 88)),

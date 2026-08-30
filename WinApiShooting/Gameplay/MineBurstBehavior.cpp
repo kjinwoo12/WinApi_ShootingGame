@@ -3,7 +3,7 @@
 
 bool MineBurstBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     e.hp = e.maxHp = 2.f + wave * 0.2f;
     e.vel = {rng.nextFloat(-20.f, 20.f), rng.nextFloat(30.f, 55.f)};
     e.radius = 18.f;
@@ -18,7 +18,7 @@ void MineBurstBehavior::tick(EnemySystems& sys, World& world, RandomSource& rng,
         e.alive = false;
         sys.bullets.spawnRadialBurst(world, e.pos);
         sys.fx.spawnExplosion(world, rng, e.pos, 2, 1.2f);
-        world.session.shake = (std::max)(world.session.shake, 0.35f);
+        world.session.presentation.shake = (std::max)(world.session.presentation.shake, 0.35f);
     }
 }
 

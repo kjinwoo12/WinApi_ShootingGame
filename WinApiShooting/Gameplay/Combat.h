@@ -2,6 +2,7 @@
 #include "BulletSystem.h"
 #include "EffectsEngine.h"
 #include "GrazeSystem.h"
+#include "PowerUpSystem.h"
 #include "Random.h"
 #include "World.h"
 
@@ -9,7 +10,7 @@
 class Combat
 {
 public:
-    Combat(EffectsEngine& effects, BulletSystem& bulletSys);
+    Combat(EffectsEngine& effects, BulletSystem& bulletSys, PowerUpSystem& powerUps);
 
     void detonateBomb(World& world, RandomSource& rng);
     void handleCollisions(World& world, RandomSource& rng);
@@ -20,5 +21,6 @@ private:
 
     EffectsEngine& fx;
     BulletSystem& bullets;
+    PowerUpSystem& powerUps;
     GrazeSystem graze;
 };

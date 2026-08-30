@@ -114,7 +114,7 @@ bool Assets::load(HWND ownerWindow)
 {
     if (!resolveRoot(ownerWindow))
         return false;
-    if (!world.load(root))
+    if (!world_.load(root))
     {
         MessageBoxW(ownerWindow,
                     L"이미지 에셋 로드에 실패했습니다.\n"
@@ -122,7 +122,7 @@ bool Assets::load(HWND ownerWindow)
                     L"Space Rage", MB_ICONERROR);
         return false;
     }
-    if (!ui.load(root))
+    if (!ui_.load(root))
     {
         MessageBoxW(ownerWindow,
                     L"HUD 에셋 로드에 실패했습니다.\n"
@@ -183,48 +183,152 @@ bool Assets::resolveRoot(HWND ownerWindow)
 const Sprite& Assets::playerSprite(int bank, bool rage) const
 {
     bank = clampInt(bank, 0, 4);
-    return rage ? world.playerRed[bank] : world.playerBlue[bank];
+    return rage ? world_.playerRed[bank] : world_.playerBlue[bank];
 }
 
 const Sprite& Assets::playerShadowSprite(int bank) const
 {
-    return world.playerShadow[clampInt(bank, 0, 4)];
+    return world_.playerShadow[clampInt(bank, 0, 4)];
 }
 
 const Sprite& Assets::enemySprite(const Enemy& enemy) const
 {
     const int i = static_cast<int>(enemy.kind);
     if (i < 0 || i >= kKindCount)
-        return pickEnemy1(world, enemy);
-    return kEnemySprite[i](world, enemy);
+        return pickEnemy1(world_, enemy);
+    return kEnemySprite[i](world_, enemy);
 }
 
 const Sprite& Assets::enemyShadowSprite(const Enemy& enemy) const
 {
     const int i = static_cast<int>(enemy.kind);
     if (i < 0 || i >= kKindCount)
-        return pickEnemy1Shadow(world, enemy);
-    return kEnemyShadow[i](world, enemy);
+        return pickEnemy1Shadow(world_, enemy);
+    return kEnemyShadow[i](world_, enemy);
 }
 
 const Sprite& Assets::bulletSprite(const Bullet& bullet) const
 {
-    const Sprite* byWeapon[] = {&world.vulcan[1], &world.plasma[0], &world.proton[0]};
+    if (bullet.spriteIndex >= 0)
+    {
+        if (bullet.weapon == WeaponLevel::Proton && bullet.spriteIndex < 3)
+            return world_.proton[bullet.spriteIndex];
+        if (bullet.weapon == WeaponLevel::Plasma && bullet.spriteIndex < 2)
+            return world_.plasma[bullet.spriteIndex];
+        if (bullet.weapon == WeaponLevel::Vulcan && bullet.spriteIndex < 3)
+            return world_.vulcan[bullet.spriteIndex];
+    }
+
+    const Sprite* byWeapon[] = {&world_.vulcan[1], &world_.plasma[0], &world_.proton[0]};
     const int w = static_cast<int>(bullet.weapon);
     if (w < 0 || w > 2)
-        return world.vulcan[0];
-    if (bullet.weapon == WeaponLevel::Proton && bullet.owner == BulletOwner::Enemy)
-    {
-        return world.proton[2];
-    }
+        return world_.vulcan[0];
     return *byWeapon[w];
 }
 
 const Sprite& Assets::explosionSprite(int type, int frame) const
 {
     if (type == 0)
-        return world.explosion1.at(frame);
+        return world_.explosion1.at(frame);
     if (type == 1)
-        return world.explosion2.at(frame);
-    return world.explosion3.at(frame);
+        return world_.explosion2.at(frame);
+    return world_.explosion3.at(frame);
+}
+
+const Sprite& Assets::exhaustSprite(int frame) const
+{
+    return world_.exhaust.at(frame % world_.exhaust.count());
+}
+
+BulletDrawParams Assets::bulletDrawParams(const Bullet& bullet) const
+{
+    BulletDrawParams params;
+    if (std::fabs(bullet.vel.x) > 1.f || std::fabs(bullet.vel.y) > 1.f)
+        params.rotationDeg = std::atan2(bullet.vel.y, bullet.vel.x) * (180.f / Pi) + 90.f;
+    if (bullet.weapon == WeaponLevel::Proton)
+        params.scale = 1.6f;
+    else if (bullet.weapon == WeaponLevel::Plasma)
+        params.scale = 1.3f;
+    else
+        params.scale = 1.8f;
+    return params;
+}
+
+const Sprite& Assets::powerUpFrame() const
+{
+    return ui_.hexFrame;
+}
+
+const Sprite& Assets::hudWeaponIcon(WeaponLevel weapon) const
+{
+    if (weapon == WeaponLevel::Plasma)
+        return world_.plasma[0];
+    if (weapon == WeaponLevel::Proton)
+        return world_.proton[0];
+    return world_.vulcan[1];
+}
+
+const Sprite& Assets::hudLifeShip() const
+{
+    return world_.playerBlue[2];
+}
+
+const Sprite& Assets::hudLifeSlot() const
+{
+    return ui_.lifeSlot;
+}
+
+const Sprite& Assets::hudBossTrack() const
+{
+    return ui_.sliderTrack;
+}
+
+const Sprite& Assets::hudPanel() const
+{
+    return ui_.mainHud;
+}
+
+const Sprite& Assets::hudSectorBanner() const
+{
+    return ui_.btnBanner;
+}
+
+const Sprite& Assets::titlePromo() const
+{
+    return world_.promo;
+}
+
+const Sprite& Assets::titleStrip() const
+{
+    return ui_.titleStrip;
+}
+
+const Sprite& Assets::titleStartButton() const
+{
+    return ui_.btnStart;
+}
+
+const Sprite& Assets::titleHighScoreStrip() const
+{
+    return ui_.hiStrip;
+}
+
+const Sprite& Assets::resultPanel() const
+{
+    return ui_.mainResult;
+}
+
+float Assets::backgroundHeight() const
+{
+    return static_cast<float>(world_.background.height());
+}
+
+int Assets::exhaustFrameCount() const
+{
+    return world_.exhaust.count();
+}
+
+const Sprite& Assets::backgroundSprite() const
+{
+    return world_.background;
 }

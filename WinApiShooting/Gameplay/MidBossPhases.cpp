@@ -3,7 +3,7 @@
 
 void MidBossPhases::tickIntro(Enemy& e, const World& world)
 {
-    const float t = world.session.bossIntroProgress();
+    const float t = world.session.run.bossIntroProgress();
     const float descend = clampFloat(t / 0.55f, 0.f, 1.f);
     const float ease = descend * descend * (3.f - 2.f * descend);
     e.pos.x = ScreenWidth * 0.5f;

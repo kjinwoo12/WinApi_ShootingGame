@@ -37,9 +37,9 @@ void OrbitMineBehavior::tick(EnemySystems&, World& world, RandomSource& rng, Ene
     e.orbitAngle += 1.2f * dt;
     e.pos = boss->pos + Vec2{std::cos(e.orbitAngle) * 90.f, std::sin(e.orbitAngle) * 90.f};
     e.bank = 2;
-    if (world.session.bossIntroActive())
+    if (world.session.run.bossIntroActive())
     {
-        const float t = world.session.bossIntroProgress();
+        const float t = world.session.run.bossIntroProgress();
         e.drawScale = clampFloat((t - 0.35f) / 0.35f, 0.f, 1.f);
     }
     else

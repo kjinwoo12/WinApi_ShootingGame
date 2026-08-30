@@ -10,9 +10,10 @@ public:
     virtual ~IScene() = default;
 
     virtual void update(SceneContext& ctx, float dt) = 0;
-    virtual void render(SceneContext& ctx, HDC hdc) = 0;
-    virtual void onKeyDown(SceneContext& ctx, WPARAM key) = 0;
-    virtual void onKeyUp(SceneContext& ctx, WPARAM key) = 0;
+    virtual void render(SceneContext& ctx) = 0;
+    virtual float screenShake(const SceneContext& ctx) const;
+    virtual void onKeyDown(SceneContext&, WPARAM) {}
+    virtual void onKeyUp(SceneContext&, WPARAM) {}
     virtual std::unique_ptr<IScene> takeNextScene() = 0;
 };
 

@@ -1,5 +1,10 @@
 #include "GdiplusRuntime.h"
+#include <gdiplus.h>
 #include <mmsystem.h>
+
+#pragma comment(lib, "gdiplus.lib")
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "msimg32.lib")
 
 GdiplusRuntime::GdiplusRuntime()
 {

@@ -8,6 +8,7 @@ class PowerUpSystem
 public:
     explicit PowerUpSystem(EffectsEngine& effects);
 
+    void trySpawnDrop(World& world, RandomSource& rng, Vec2 pos);
     void update(World& world, RandomSource& rng, float dt);
 
 private:

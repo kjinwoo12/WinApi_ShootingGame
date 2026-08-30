@@ -3,7 +3,7 @@
 
 bool MineSeekerBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     e.hp = e.maxHp = 3.f + wave * 0.25f;
     e.vel = {rng.nextFloat(-30.f, 30.f), rng.nextFloat(40.f, 80.f)};
     e.radius = 18.f;

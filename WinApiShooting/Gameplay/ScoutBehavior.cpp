@@ -3,7 +3,7 @@
 
 bool ScoutBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     float hp = 2.f + wave * 0.15f;
     float vy = rng.nextFloat(90.f, 140.f) + wave * 6.f;
     if (e.color == 2)
@@ -20,7 +20,7 @@ bool ScoutBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 
 void ScoutBehavior::tick(EnemySystems& sys, World& world, RandomSource& rng, Enemy& e, float dt) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     const Vec2 playerPos = world.player.pos;
 
     if (e.color == 0)

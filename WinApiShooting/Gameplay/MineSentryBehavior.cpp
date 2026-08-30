@@ -3,7 +3,7 @@
 
 bool MineSentryBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     e.hp = e.maxHp = 4.f + wave * 0.25f;
     e.vel = {0.f, rng.nextFloat(35.f, 55.f)};
     e.radius = 18.f;
@@ -13,7 +13,7 @@ bool MineSentryBehavior::configure(World& world, RandomSource& rng, Enemy& e) co
 
 void MineSentryBehavior::tick(EnemySystems& sys, World& world, RandomSource&, Enemy& e, float dt) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     e.pos.y += e.vel.y * dt;
     e.shootCooldown -= dt;
     if (e.shootCooldown > 0.f || e.pos.y <= 0.f || e.pos.y >= ScreenHeight * 0.8f)

@@ -3,7 +3,7 @@
 
 bool FighterBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     float hp = 5.f + wave * 0.4f;
     float vy = rng.nextFloat(60.f, 100.f) + wave * 4.f;
     if (e.color == 2)
@@ -20,7 +20,7 @@ bool FighterBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 
 void FighterBehavior::tick(EnemySystems& sys, World& world, RandomSource& rng, Enemy& e, float dt) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     const Vec2 playerPos = world.player.pos;
 
     if (e.color == 0)

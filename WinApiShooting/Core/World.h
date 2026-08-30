@@ -45,6 +45,6 @@ struct World
         player.invuln = 2.f;
         session = SessionState{};
         session.highScore = keepHigh;
-        session.waveTimer = 0.5f;
+        session.run.waveTimer = 0.5f;
     }
 };

@@ -5,7 +5,6 @@
 #include "Enemy.h"
 #include "EnemyKind.h"
 #include "Explosion.h"
-#include "GameState.h"
 #include "Particle.h"
 #include "PowerUp.h"
 #include "WeaponLevel.h"

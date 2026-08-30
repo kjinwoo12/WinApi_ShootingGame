@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "IScene.h"
 #include "TitleScene.h"
+#include "Renderer.h"
 
 Game::Game() = default;
 
@@ -25,11 +25,6 @@ void Game::onKeyDown(WPARAM key)
 {
     ctx.input.setKey(key, true);
 
-    if (key == 'X' || key == 'x' || key == 'C' || key == 'c')
-    {
-        ctx.input.bombEdge = true;
-    }
-
     if (key == VK_ESCAPE)
     {
         PostMessageW(ctx.window, WM_CLOSE, 0, 0);
@@ -47,21 +42,16 @@ void Game::onKeyUp(WPARAM key)
 
 void Game::update(float dt)
 {
-    ctx.world.session.titlePulse += dt;
-    ctx.world.session.gameTime += dt;
-
-    if (ctx.world.session.shake > 0.f)
-    {
-        ctx.world.session.shake = (std::max)(0.f, ctx.world.session.shake - dt * 8.f);
-    }
-
     scene->update(ctx, dt);
     applyPendingScene();
 }
 
 void Game::render(HDC hdc)
 {
-    scene->render(ctx, hdc);
+    Renderer& r = ctx.renderer;
+    r.beginFrame(ctx.world, ctx.assets, ctx.rng, scene->screenShake(ctx));
+    scene->render(ctx);
+    r.present(hdc);
 }
 
 void Game::applyPendingScene()

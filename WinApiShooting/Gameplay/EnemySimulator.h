@@ -11,7 +11,6 @@ public:
 
     void spawnEnemy(World& world, RandomSource& rng, EnemyKind kind,
                     float x, float y, int color = -1);
-    void spawnMidBoss(World& world, RandomSource& rng);
     void update(World& world, RandomSource& rng, float dt);
 
 private:

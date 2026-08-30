@@ -1,13 +1,18 @@
 #pragma once
 #include "EffectsEngine.h"
+#include "Input.h"
+#include "PlayingServices.h"
 #include "Random.h"
 #include "World.h"
 
 class PlayingSession
 {
 public:
-    static void tickTimers(World& world, EffectsEngine& fx, RandomSource& rng,
-                           float bgHeight, float dt);
-    // true = GameOver.
-    static bool checkPlayerDeath(World& world, EffectsEngine& fx, RandomSource& rng);
+    static bool tick(World& world, InputState& input, RandomSource& rng, EffectsEngine& fx,
+                     PlayingServices& play, float bgHeight, float dt);
+    static void finalizePlayerDeath(World& world, EffectsEngine& fx, RandomSource& rng);
+
+private:
+    static void tickTimers(World& world, EffectsEngine& fx, float bgHeight, float dt);
+    static void syncMidBossHp(World& world);
 };

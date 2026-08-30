@@ -3,7 +3,7 @@
 
 bool SawChaseBehavior::configure(World& world, RandomSource& rng, Enemy& e) const
 {
-    const int wave = world.session.wave;
+    const int wave = world.session.run.wave;
     e.hp = e.maxHp = 5.f + wave * 0.3f;
     e.vel = {rng.nextFloat(-40.f, 40.f), rng.nextFloat(50.f, 90.f)};
     e.radius = 18.f;

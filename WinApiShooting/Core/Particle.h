@@ -1,5 +1,6 @@
 #pragma once
 #include "Common.h"
+#include "Color.h"
 
 struct Particle
 {
@@ -8,6 +9,6 @@ struct Particle
     float life = 0.5f;
     float maxLife = 0.5f;
     float size = 3.f;
-    Gdiplus::Color color{255, 255, 200, 80};
+    Rgba8 color{255, 200, 80, 255};
     bool alive = true;
 };

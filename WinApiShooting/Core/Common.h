@@ -3,8 +3,6 @@
 #define NOMINMAX
 #include <windows.h>
 #include <windowsx.h>
-#include <objidl.h>
-#include <gdiplus.h>
 
 #include <algorithm>
 #include <cmath>
@@ -12,10 +10,6 @@
 #include <random>
 #include <string>
 #include <vector>
-
-#pragma comment(lib, "gdiplus.lib")
-#pragma comment(lib, "winmm.lib")
-#pragma comment(lib, "msimg32.lib")
 
 inline constexpr int ScreenWidth = 700;
 inline constexpr int ScreenHeight = 800;

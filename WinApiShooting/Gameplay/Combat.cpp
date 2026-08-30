@@ -3,22 +3,23 @@
 #include "EnemyBehaviors.h"
 #include "EnemySystems.h"
 
-Combat::Combat(EffectsEngine& effects, BulletSystem& bulletSys)
-    : fx(effects), bullets(bulletSys), graze(effects) {}
+Combat::Combat(EffectsEngine& effects, BulletSystem& bulletSys, PowerUpSystem& powerUpSys)
+    : fx(effects), bullets(bulletSys), powerUps(powerUpSys), graze(effects) {}
 
 void Combat::detonateBomb(World& world, RandomSource& rng)
 {
     PlayerState& player = world.player;
-    SessionState& session = world.session;
+    RunSession& run = world.session.run;
+    PresentationSession& pres = world.session.presentation;
     if (player.bombs <= 0 || player.bombing() || player.lives <= 0)
         return;
 
     player.bombs--;
-    session.bombsUsed++;
+    run.bombsUsed++;
     player.bombTimer = 0.55f;
     player.invuln = (std::max)(player.invuln, 0.80f);
-    session.bombFlash = 0.25f;
-    session.shake = (std::max)(session.shake, 0.55f);
+    run.bombFlash = 0.25f;
+    pres.shake = (std::max)(pres.shake, 0.55f);
     fx.spawnExplosion(world, rng, player.pos, 0, 1.8f);
 
     int converted = 0;
@@ -36,7 +37,7 @@ void Combat::detonateBomb(World& world, RandomSource& rng)
             spark.vel = {rng.nextFloat(-30.f, 30.f), rng.nextFloat(-30.f, 30.f)};
             spark.life = spark.maxLife = 0.12f;
             spark.size = 2.f;
-            spark.color = Gdiplus::Color(220, 255, 255, 200);
+            spark.color = rgba(255, 255, 200, 220);
             world.particles.push_back(spark);
         }
     }
@@ -62,16 +63,17 @@ void Combat::detonateBomb(World& world, RandomSource& rng)
 void Combat::applyEnemyKill(World& world, RandomSource& rng, Enemy& e)
 {
     PlayerState& player = world.player;
-    SessionState& session = world.session;
+    RunSession& run = world.session.run;
+    PresentationSession& pres = world.session.presentation;
     const IEnemyBehavior& behavior = EnemyBehaviors::at(e.kind);
     EnemySystems sys{bullets, fx};
     const KillOutcome outcome = behavior.killOutcome(world);
 
     behavior.onKilled(sys, world, rng, e);
 
-    session.combo++;
-    session.comboTimer = 2.2f;
-    session.score += outcome.baseScore * (1 + session.combo / 5) + session.wave * 10;
+    run.combo++;
+    run.comboTimer = 2.2f;
+    run.score += outcome.baseScore * (1 + run.combo / 5) + run.wave * 10;
     if (!player.raging())
     {
         player.rageGauge = clampFloat(player.rageGauge + 2.f, 0.f, 100.f);
@@ -90,25 +92,26 @@ void Combat::applyEnemyKill(World& world, RandomSource& rng, Enemy& e)
     fx.spawnExplosion(world, rng, e.pos, outcome.boomType, outcome.boomScale);
     if (outcome.spawnRandomPowerUp)
     {
-        fx.spawnPowerUp(world, rng, e.pos);
+        powerUps.trySpawnDrop(world, rng, e.pos);
     }
-    session.shake = (std::max)(session.shake, 0.25f);
+    pres.shake = (std::max)(pres.shake, 0.25f);
 }
 
 void Combat::damagePlayer(World& world, RandomSource& rng)
 {
     PlayerState& player = world.player;
-    SessionState& session = world.session;
+    RunSession& run = world.session.run;
+    PresentationSession& pres = world.session.presentation;
     if (player.invuln > 0.f)
         return;
     player.lives--;
-    session.combo = 0;
-    session.sectorNoHit = false;
+    run.combo = 0;
+    run.sectorNoHit = false;
     player.hurtFlash = 0.45f;
     player.invuln = 2.0f;
     player.rageGauge = 0.f;
     player.rageTimer = 0.f;
-    session.shake = 0.8f;
+    pres.shake = 0.8f;
     fx.spawnExplosion(world, rng, player.pos, 0, 1.3f);
     fx.spawnHitSparks(world, rng, player.pos, true);
     if (player.weapon == WeaponLevel::Proton)
@@ -120,8 +123,7 @@ void Combat::damagePlayer(World& world, RandomSource& rng)
 void Combat::handleCollisions(World& world, RandomSource& rng)
 {
     PlayerState& player = world.player;
-    SessionState& session = world.session;
-    const bool intro = session.bossIntroActive();
+    const bool intro = world.session.run.bossIntroActive();
 
     graze.process(world, rng);
 

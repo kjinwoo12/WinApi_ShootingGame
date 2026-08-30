@@ -168,9 +168,13 @@
     <ClCompile Include="App\TitleScene.cpp" />
     <ClCompile Include="App\PlayingScene.cpp" />
     <ClCompile Include="App\GameOverScene.cpp" />
+    <ClCompile Include="App\PlayingHudView.cpp" />
+    <ClCompile Include="App\TitleOverlay.cpp" />
+    <ClCompile Include="App\GameOverOverlay.cpp" />
     <ClCompile Include="App\GdiplusRuntime.cpp" />
     <ClCompile Include="App\WinApp.cpp" />
     <ClCompile Include="Core\DeltaTime.cpp" />
+    <ClCompile Include="Core\SessionState.cpp" />
     <ClCompile Include="Gameplay\EffectsEngine.cpp" />
     <ClCompile Include="Gameplay\PowerUpSystem.cpp" />
     <ClCompile Include="Gameplay\BulletSystem.cpp" />
@@ -178,6 +182,8 @@
     <ClCompile Include="Gameplay\PlayerWeapon.cpp" />
     <ClCompile Include="Gameplay\Combat.cpp" />
     <ClCompile Include="Gameplay\PlayingSession.cpp" />
+    <ClCompile Include="Gameplay\PlayingServices.cpp" />
+    <ClCompile Include="Gameplay\MidBossEncounter.cpp" />
     <ClCompile Include="Gameplay\PlayerController.cpp" />
     <ClCompile Include="Gameplay\EnemyBehaviors.cpp" />
     <ClCompile Include="Gameplay\ScoutBehavior.cpp" />
@@ -194,22 +200,20 @@
     <ClCompile Include="Gameplay\WaveCatalog.cpp" />
     <ClCompile Include="Gameplay\WaveDirector.cpp" />
     <ClCompile Include="Render\Renderer.cpp" />
-    <ClCompile Include="Render\WorldDrawer.cpp" />
-    <ClCompile Include="Render\RenderPowerUp.cpp" />
-    <ClCompile Include="Render\RenderBossIntro.cpp" />
-    <ClCompile Include="Render\RenderHud.cpp" />
-    <ClCompile Include="Render\RenderTitle.cpp" />
-    <ClCompile Include="Render\RenderGameOver.cpp" />
+    <ClCompile Include="Render\WorldView.cpp" />
+    <ClCompile Include="Render\UiText.cpp" />
+    <ClCompile Include="Render\UiMeter.cpp" />
     <ClCompile Include="Render\Assets.cpp" />
+    <ClCompile Include="Render\WorldObjects.cpp" />
     <ClCompile Include="Render\WorldSprites.cpp" />
     <ClCompile Include="Render\UiSprites.cpp" />
     <ClCompile Include="Render\Sprite.cpp" />
     <ClCompile Include="Render\SpriteSheet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Color.h" />
     <ClInclude Include="Core\Common.h" />
     <ClInclude Include="Core\DeltaTime.h" />
-    <ClInclude Include="Core\GameState.h" />
     <ClInclude Include="Core\EnemyKind.h" />
     <ClInclude Include="Core\WeaponLevel.h" />
     <ClInclude Include="Core\BulletOwner.h" />
@@ -232,6 +236,8 @@
     <ClInclude Include="Gameplay\PlayerWeapon.h" />
     <ClInclude Include="Gameplay\Combat.h" />
     <ClInclude Include="Gameplay\PlayingSession.h" />
+    <ClInclude Include="Gameplay\PlayingServices.h" />
+    <ClInclude Include="Gameplay\MidBossEncounter.h" />
     <ClInclude Include="Gameplay\PlayerController.h" />
     <ClInclude Include="Gameplay\KillOutcome.h" />
     <ClInclude Include="Gameplay\EnemySystems.h" />
@@ -256,9 +262,10 @@
     <ClInclude Include="Render\WorldSprites.h" />
     <ClInclude Include="Render\UiSprites.h" />
     <ClInclude Include="Render\Renderer.h" />
-    <ClInclude Include="Render\WorldDrawer.h" />
-    <ClInclude Include="Render\RenderUi.h" />
-    <ClInclude Include="Render\RenderUiDraw.h" />
+    <ClInclude Include="Render\WorldView.h" />
+    <ClInclude Include="Render\WorldObjects.h" />
+    <ClInclude Include="Render\UiText.h" />
+    <ClInclude Include="Render\UiMeter.h" />
     <ClInclude Include="Render\Sprite.h" />
     <ClInclude Include="Render\SpriteSheet.h" />
     <ClInclude Include="App\AppContext.h" />
@@ -269,6 +276,9 @@
     <ClInclude Include="App\SceneContext.h" />
     <ClInclude Include="App\TitleScene.h" />
     <ClInclude Include="App\PlayingScene.h" />
+    <ClInclude Include="App\PlayingHudView.h" />
+    <ClInclude Include="App\TitleOverlay.h" />
+    <ClInclude Include="App\GameOverOverlay.h" />
     <ClInclude Include="App\GameOverScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

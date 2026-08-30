@@ -6,7 +6,8 @@ PlayerController::PlayerController(PlayerWeapon& weaponRef, Combat& combatRef)
 void PlayerController::update(World& world, InputState& input, RandomSource& rng, float dt)
 {
     PlayerState& player = world.player;
-    SessionState& session = world.session;
+    RunSession& run = world.session.run;
+    PresentationSession& pres = world.session.presentation;
 
     Vec2 dir{};
     if (input.moveUp())
@@ -40,7 +41,7 @@ void PlayerController::update(World& world, InputState& input, RandomSource& rng
     if (player.raging())
     {
         player.rageTimer -= dt;
-        session.shake = (std::max)(session.shake, 0.08f);
+        pres.shake = (std::max)(pres.shake, 0.08f);
         if (player.rageTimer <= 0.f)
         {
             player.rageTimer = 0.f;
@@ -49,7 +50,7 @@ void PlayerController::update(World& world, InputState& input, RandomSource& rng
     }
     else
     {
-        if (session.combo > 0 && session.comboTimer > 0.f)
+        if (run.combo > 0 && run.comboTimer > 0.f)
         {
             player.rageGauge = clampFloat(player.rageGauge + 4.f * dt, 0.f, 100.f);
         }

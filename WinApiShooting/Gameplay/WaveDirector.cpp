@@ -1,4 +1,5 @@
 #include "WaveDirector.h"
+#include "MidBossEncounter.h"
 #include "WaveCatalog.h"
 #include <array>
 
@@ -28,7 +29,7 @@ void spawnF02(EnemySimulator& enemies, World& world, RandomSource& rng, float to
 
 void spawnF03(EnemySimulator& enemies, World& world, RandomSource& rng, float top, float)
 {
-    const int color = (world.session.wave <= 3) ? 0 : 1;
+    const int color = (world.session.run.wave <= 3) ? 0 : 1;
     const float cx = ScreenWidth * 0.5f;
     for (int i = 0; i < 7; ++i)
     {
@@ -151,14 +152,14 @@ void WaveDirector::spawnFormation(World& world, RandomSource& rng, FormationId i
 
 void WaveDirector::spawnWave(World& world, RandomSource& rng)
 {
-    ++world.session.wave;
-    const int wave = world.session.wave;
-    world.session.sector = ((wave - 1) / 3) + 1;
+    ++world.session.run.wave;
+    const int wave = world.session.run.wave;
+    world.session.run.sector = ((wave - 1) / 3) + 1;
 
-    if (WaveCatalog::isMidBossWave(wave, world.session.sector))
+    if (WaveCatalog::isMidBossWave(wave, world.session.run.sector))
     {
-        enemies.spawnMidBoss(world, rng);
-        world.session.waveTimer = 2.5f;
+        MidBossEncounter::begin(world, rng);
+        world.session.run.waveTimer = 2.5f;
         return;
     }
 
@@ -172,43 +173,43 @@ void WaveDirector::spawnWave(World& world, RandomSource& rng)
         enemies.spawnEnemy(world, rng, EnemyKind::Fighter, ScreenWidth * 0.5f, -200.f, 1);
     }
 
-    world.session.waveTimer = 2.5f;
+    world.session.run.waveTimer = 2.5f;
 }
 
 void WaveDirector::trySpawn(World& world, RandomSource& rng, float dt)
 {
-    SessionState& session = world.session;
+    RunSession& run = world.session.run;
 
-    if (session.sectorClearTimer > 0.f)
+    if (run.sectorClearTimer > 0.f)
     {
-        session.sectorClearTimer -= dt;
-        if (session.sectorClearTimer <= 0.f)
+        run.sectorClearTimer -= dt;
+        if (run.sectorClearTimer <= 0.f)
         {
             spawnWave(world, rng);
         }
         return;
     }
 
-    if (session.midBossAlive)
+    if (run.midBossAlive)
     {
         return;
     }
 
-    session.waveTimer -= dt;
-    if (session.waveTimer > 0.f || !world.enemies.empty())
+    run.waveTimer -= dt;
+    if (run.waveTimer > 0.f || !world.enemies.empty())
     {
         return;
     }
 
-    if (session.wave > 0 && session.wave % 3 == 0)
+    if (run.wave > 0 && run.wave % 3 == 0)
     {
-        session.sectorClearTimer = 2.0f;
-        if (session.sectorNoHit)
+        run.sectorClearTimer = 2.0f;
+        if (run.sectorNoHit)
         {
-            session.score += 2000;
+            run.score += 2000;
             world.player.bombs = clampInt(world.player.bombs + 1, 0, 5);
         }
-        session.sectorNoHit = true;
+        run.sectorNoHit = true;
         return;
     }
 

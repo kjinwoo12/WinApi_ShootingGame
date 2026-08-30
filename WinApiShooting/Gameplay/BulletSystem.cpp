@@ -16,10 +16,6 @@ void BulletSystem::spawn(World& world, BulletOwner owner, WeaponLevel weapon,
     b.radius = (weapon == WeaponLevel::Proton) ? 10.f : (weapon == WeaponLevel::Plasma ? 8.f : 5.f);
     if (owner == BulletOwner::Enemy)
         b.radius = 6.f;
-    if (owner == BulletOwner::Player && world.player.raging())
-    {
-        b.damage += 1;
-    }
     world.bullets.push_back(b);
 }
 
@@ -28,8 +24,16 @@ void BulletSystem::spawnRadialBurst(World& world, Vec2 pos)
     for (int i = 0; i < 8; ++i)
     {
         const float ang = (Pi * 2.f * static_cast<float>(i)) / 8.f;
-        spawn(world, BulletOwner::Enemy, WeaponLevel::Proton,
-              pos, {std::cos(ang) * 220.f, std::sin(ang) * 220.f}, 1);
+        Bullet b;
+        b.owner = BulletOwner::Enemy;
+        b.weapon = WeaponLevel::Proton;
+        b.spriteIndex = 2;
+        b.pos = pos;
+        b.vel = {std::cos(ang) * 220.f, std::sin(ang) * 220.f};
+        b.damage = 1;
+        b.life = 2.5f;
+        b.radius = 6.f;
+        world.bullets.push_back(b);
     }
 }
 

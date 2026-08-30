@@ -1,36 +1,33 @@
 # SPACE RAGE
 
-Win32와 GDI+로 구현한 세로 스크롤 아케이드 슈팅 게임입니다.  
-고등학교 시절에 제작했던 WinAPI 슈팅을 바탕으로, 기억을 더듬어 재구성한 리메이크 작품입니다.
+Win32와 GDI+로 구현한 세로 스크롤 아케이드 슈팅입니다.
+고등학교 시절 WinAPI 슈팅을 바탕으로, 기억을 더듬어 재구성한 리메이크입니다.
 
-엔진·게임 프레임워크를 사용하지 않고 창, 메시지 루프, 더블 버퍼링, 스프라이트 렌더링까지 직접 구성했습니다.  
-레거시 API 위에서 레이어 분리와 확장 가능한 구조를 보이는 것을 목표로 합니다.
-
----
+DirectX와 게임 엔진을 쓰지 않습니다. 창, 메시지 루프, 더블 버퍼, 스프라이트 그리기까지 Win32/GDI+로 직접 구성했습니다.
+GDI+는 의도적 제약입니다. GPU API 대신 루프, 상태, 콘텐츠 확장의 책임 경계를 코드로 보이려고 골랐습니다.
 
 ## 프로젝트 목적
 
-- 엔진이 없는 환경에서 게임 루프와 상태의 책임 경계를 명확히 둘 것
-- 엔티티는 값 타입으로 유지하고, 행동은 Strategy로 분리할 것
-- 적·웨이브 확장을 작은 단위 변경으로 수용할 수 있을 것
+- 엔진 없이 게임 루프와 씬 상태의 소유권을 나눌 것
+- 엔티티는 값 타입, 적 행동은 Strategy 테이블로 둘 것
+- 적과 웨이브 추가는 작은 단위 변경으로 끝날 것
 
-적용한 설계: `App` / `Core` / `Gameplay` / `Render` 레이어, `IEnemyBehavior` 등록 테이블, 단일 책임 원칙.
-
----
+레이어: `App`, `Core`, `Gameplay`, `Render`.
+적 확장: `IEnemyBehavior`와 `EnemyBehaviors` 등록 테이블. `Enemy` 상속 없음.
 
 ## 개요
 
-핵심 플레이는 좁은 히트박스, 그레이즈, 콤보, 레이지입니다.  
-피격 시 화력이 약화되고, 그레이즈로 성장하는 구조를 지향합니다.
+좁은 히트박스, 그레이즈, 콤보, 레이지.
+피격 시 화력 약화, 그레이즈로 게이지 회복.
 
 | 항목 | 내용 |
 |------|------|
 | 장르 | 아케이드 슈팅 (세로 스크롤) |
-| 해상도 | 700×800 고정 창 |
+| 해상도 | 700x800 고정 창 |
 | 입력 | 키보드 |
-| 사운드 | 1.0 기준 무음 (`winmm`는 타이머 정밀도용) |
-
----
+| 씬 | Title, Playing, GameOver |
+| 사운드 | 없음 (`winmm`는 타이머 정밀도만) |
+| 테스트 / CI | 없음. 검증은 빌드와 플레이 루프 |
 
 ## 조작
 
@@ -38,46 +35,50 @@ Win32와 GDI+로 구현한 세로 스크롤 아케이드 슈팅 게임입니다.
 |----|------|
 | WASD | 이동 |
 | Space / Z | 발사 |
-| Shift | 포커스 (저속 이동, 히트박스 표시) |
+| Shift | 포커스 (저속, 히트박스 표시) |
 | X / C | 폭탄 |
-| Enter | 타이틀 / 재시작 |
+| Enter | 타이틀에서 시작 / 게임오버에서 타이틀 |
 | Esc | 종료 |
 
----
+## 빌드
 
-## 빌드 방법
+요구: Windows, Visual Studio (C++ 데스크톱 개발 워크로드), Windows SDK.
+프로젝트 도구 집합은 `v145`입니다.
 
-**요구 환경:** Windows, Visual Studio (C++ 데스크톱 개발), Windows SDK
+1. `WinApiShooting.slnx`를 연다.
+2. Debug x64 또는 Release x64.
+3. 빌드 후 실행.
 
-1. `WinApiShooting.slnx`를 엽니다.
-2. 구성은 **Debug | x64** 또는 **Release | x64**를 선택합니다.
-3. 빌드 후 실행합니다.
+작업 디렉터리는 `WinApiShooting/` (vcxproj와 같음)을 권장합니다.
+에셋은 실행 파일 기준으로 `Assets/SpaceRage`, `Assets/WenrexaUi` 후보 경로를 탐색합니다.
 
-실행 시 작업 디렉터리는 저장소 루트 또는 프로젝트 경로를 권장합니다.  
-이미지 에셋은 `WinApiShooting/Assets/` 하위의 `SpaceRage` 및 UI 리소스 경로에서 탐색합니다.
+## 디렉터리
 
----
-
-## 디렉터리 구조
+경로는 모두 `WinApiShooting/` 아래입니다.
 
 ```
-App/        진입점, 창, GDI+ 수명, Game 파사드
-Core/       값 타입 엔티티, World, DeltaTime
-Gameplay/   전투, 웨이브, 적 Behavior
-Render/     스프라이트, HUD, 월드 드로우
-Assets/     PNG 리소스 (기존 팩 재사용)
+App/        Win32 진입, GDI+ 수명, Game, 씬, HUD/타이틀/결과 오버레이
+Core/       값 타입, World, SessionState, 입력, 충돌, Rgba8
+Gameplay/   PlayingSession, Combat, 웨이브, IEnemyBehavior
+Render/     Renderer, Assets(스프라이트 선택), WorldView, *Object::render, Sprite
+Assets/     PNG (SpaceRage, WenrexaUi)
 ```
 
-적 추가 절차는 `EnemyKind` 정의, `XxxBehavior` 구현, `EnemyBehaviors` 테이블 등록, 웨이브 스폰 연결 순입니다.  
-`Enemy` 상속 계층은 사용하지 않으며, 데이터는 값 타입, 행동은 Strategy로 분리합니다.
+월드 표시: 엔티티 상태, `PlayerObject` 등 `*Object::render()`, `Assets` selector, `Sprite::draw`.
+씬 UI는 `PlayingHudView`, `TitleOverlay`, `GameOverOverlay`가 소유합니다. Render는 프레임 버퍼와 스프라이트만 담당합니다.
 
-아키텍처 상세는 `.result/ARCHITECTURE_ANALYSIS.md`, 기획은 `.result/SPACE_RAGE_기획서.md`를 참고하시기 바랍니다.
+### 적 추가
 
----
+1. `EnemyKind` enum 끝에 추가
+2. `XxxBehavior : IEnemyBehavior` (`configure` / `tick`)
+3. `EnemyBehaviors.cpp` 테이블에 등록 (인덱스 = enum 순서)
+4. 필요 시 `WaveDirector` / `WaveCatalog`에서 스폰
+
+Behavior는 `EnemySystems`(탄과 이펙트)만 주입받습니다. 플레이어 무기, 폭탄 API에는 의존하지 않습니다.
 
 ## 구현 요약
 
-- 업데이트·렌더 경로는 메인 스레드에서 처리하며, 루프 중 디스크·네트워크 등 블로킹 I/O를 두지 않습니다. 리소스 로드는 초기화 단계에서 수행합니다.
-- `QueryPerformanceCounter` 기반 `DeltaTime`을 사용하고, 과도한 프레임 간격은 상한으로 제한합니다.
-- 무기, 폭탄, 충돌, 탄 생성은 역할별로 분리되어 있으며, 적 Behavior는 `BulletSystem`에만 의존합니다.
-- 중괄호는 Allman 스타일, `auto`는 사용하지 않는 코딩 규칙을 적용했습니다.
+- 업데이트와 렌더는 메인 스레드. 루프 중 디스크, 네트워크, `Sleep` 없음. 스프라이트 로드는 `Game::init`.
+- `QueryPerformanceCounter` 기반 `DeltaTime`. 프레임 간격 상한 있음.
+- 무기, 폭탄, 충돌, 탄은 역할별 클래스. Playing 오케스트레이션은 `PlayingSession::tick`.
+- 중괄호 Allman. `auto` 미사용.
